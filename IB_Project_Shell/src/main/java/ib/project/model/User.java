@@ -1,5 +1,6 @@
 package ib.project.model;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 
+import org.joda.time.DateTime;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -38,11 +40,20 @@ public class User implements UserDetails{
     @Column(name = "password")
     private String password;
 	
+	@Column(name = "last_password_reset_date")
+    private Timestamp lastPasswordResetDate;
+	
 	@Column(name = "certificate")
     private String certificate;
 	
 	@Column(name = "enabled")
     private boolean enabled;
+	
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_authority",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
+    private List<Authority> authorities;
 	
 	
 	public Long getId() {
@@ -66,6 +77,8 @@ public class User implements UserDetails{
     }
 
     public void setPassword(String password) {
+    	Timestamp now = new Timestamp(DateTime.now().getMillis());
+        this.setLastPasswordResetDate( now );
         this.password = password;
     }
     
@@ -103,12 +116,15 @@ public class User implements UserDetails{
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+    public Timestamp getLastPasswordResetDate() {
+        return lastPasswordResetDate;
+    }
+
+    public void setLastPasswordResetDate(Timestamp lastPasswordResetDate) {
+        this.lastPasswordResetDate = lastPasswordResetDate;
+    }
     
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_authority",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
-    private List<Authority> authorities;
     
     @JsonIgnore
     @Override

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<storage>
+	<userName>John Smith</userName>
+	<image>
+		<name>cat.jpg</name>
+		<size>144KB</size>
+	</image>
+	<pcDate>2019-05-17</pcDate>
+</storage>

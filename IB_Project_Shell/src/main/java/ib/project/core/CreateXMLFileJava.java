@@ -16,7 +16,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 public class CreateXMLFileJava {
-	public static final String xmlFilePath = "C:\\Users\\Win7\\Desktop\\Files\\xmlfile.xml";
+	public static final String xmlFilePath = "C:\\ProjekatIB\\IB_Project_Shell\\data\\xmlfile.xml";
 	
 	public static void main(String argv[]) {
 		 

@@ -1,6 +1,5 @@
 package ib.project.core;
 
-
 import java.io.File;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -16,8 +15,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 public class CreateXMLFileJava {
-	public static final String xmlFilePath = "C:\\ProjekatIB\\IB_Project_Shell\\data\\xmlfile.xml";
-	
+	public static final String xmlFilePath = "D:\\ProjekatIB\\IB_Project_Shell\\data\\xmlfile.xml";
 	public static void main(String argv[]) {
 		 
         try {

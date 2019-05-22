@@ -5,10 +5,16 @@ import java.util.ResourceBundle;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
+import ib.project.property.FileStorageProperties;
 import ib.project.rest.DemoController;
 
 @SpringBootApplication
+@EnableConfigurationProperties({
+    FileStorageProperties.class
+})
+
 public class DemoApplication {
 
 	private static String DATA_DIR_PATH;

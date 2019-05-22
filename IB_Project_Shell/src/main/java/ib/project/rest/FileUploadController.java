@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import ib.project.payload.UploadFileResponse;
+import ib.project.service.FileStorageService;
+
 @RestController
 public class FileUploadController {
 	private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);

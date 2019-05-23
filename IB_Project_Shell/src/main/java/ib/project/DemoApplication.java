@@ -5,12 +5,13 @@ import java.util.ResourceBundle;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 import ib.project.property.FileStorageProperties;
 import ib.project.rest.DemoController;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 @EnableConfigurationProperties({
     FileStorageProperties.class
 })

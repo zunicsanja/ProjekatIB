@@ -14,7 +14,6 @@ import ib.project.rest.DemoController;
 @EnableConfigurationProperties({
     FileStorageProperties.class
 })
-
 public class DemoApplication {
 
 	private static String DATA_DIR_PATH;

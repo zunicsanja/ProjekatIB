@@ -1,10 +1,16 @@
 package ib.project.core;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.soap.Node;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -14,17 +20,34 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import ib.project.model.Image;
+
 public class CreateXMLFileJava {
-	public static final String xmlFilePath = "D:\\ProjekatIB\\IB_Project_Shell\\data\\xmlfile.xml";
-	public static void main(String argv[]) {
-		 
+	
+	
+	public static final String xmlFilePath = "C:\\ProjekatIB\\IB_Project_Desktop\\data\\xmlfile.xml";
+	public static void main(String argv[]) throws IOException {
+		
+		Image image = new Image();
+		
         try {
+        	File folder = new File("C:\\Users\\Emilija\\Desktop\\slikeIB");
+    		File[] listOfFiles = folder.listFiles();
+
+    		for (int i = 0; i < listOfFiles.length; i++) {
+    		  if (listOfFiles[i].isFile()) {
+    		    System.out.println("File " + listOfFiles[i].getName());
+    		  } else if (listOfFiles[i].isDirectory()) {
+    		    System.out.println("Directory " + listOfFiles[i].getName());
+    		  }
+    		}
  
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
  
             DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
  
             Document document = documentBuilder.newDocument();
+            document.setXmlStandalone(true);
             
             Element storage = document.createElement("storage");
             document.appendChild(storage);
@@ -33,16 +56,23 @@ public class CreateXMLFileJava {
             userName.appendChild(document.createTextNode("John Smith"));
             storage.appendChild(userName);
             
-            Element image = document.createElement("image");
-            storage.appendChild(image);
+	        Element images = document.createElement("images");
+	        storage.appendChild(images);
+	        
             
-            Element name = document.createElement("name");
-            name.appendChild(document.createTextNode("cat.jpg"));
-            image.appendChild(name);
+	        for(int i = 0; i<listOfFiles.length; i++) {
+	        	Element imageElement = document.createElement("image");
+		        images.appendChild(imageElement);
+		        
+	        	Element imageName = document.createElement("name");
+	        	imageName.setTextContent(listOfFiles[i].getName());
+	        	imageElement.appendChild(imageName);
+	        }
             
             Element size = document.createElement("size");
             size.appendChild(document.createTextNode("144 KB"));
-            image.appendChild(size);
+            images.appendChild(size);
+            
             
             Element date = document.createElement("date");
             date.appendChild(document.createTextNode("2019-05-17"));

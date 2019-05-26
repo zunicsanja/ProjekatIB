@@ -4,6 +4,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream.GetField;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
@@ -29,13 +32,13 @@ import org.w3c.dom.Element;
 public class CreateXMLFileJava {
 	
 	
-	public static final String xmlFilePath = "C:\\ProjekatIB\\IB_Project_Desktop\\data\\xmlfile.xml";
-	public static void main(String argv[]) throws IOException {
+	public static final String xmlFilePath = "D:\\ProjekatIB\\IB_Project_Desktop\\data\\xmlfile.xml";
+	public static void main(String argv[]) throws IOException, NoSuchAlgorithmException {
 		
 		ArrayList<String> fileNames = new ArrayList<>();
 		
         try {
-        	File folder = new File("C:\\Users\\Emilija\\Desktop\\slikeIB");
+        	File folder = new File("C:\\Users\\Win7\\Desktop\\slike");
     		File[] listOfFiles = folder.listFiles();
 
     		for (int i = 0; i < listOfFiles.length; i++) {
@@ -84,6 +87,19 @@ public class CreateXMLFileJava {
 				int iheight = imagee.getHeight();
 				height.setTextContent(Integer.toString(iheight));
 				imageElement.appendChild(height);
+				
+				Element hash = document.createElement("hash");
+				String path = "C:\\Users\\Win7\\Desktop\\slike";
+
+		        MessageDigest md = MessageDigest.getInstance("MD5");
+		        byte[] hashInBytes = md.digest(path.getBytes(StandardCharsets.UTF_8));
+
+		        StringBuilder sb = new StringBuilder();
+		        for (byte b : hashInBytes) {
+		            sb.append(String.format("%02x", b));
+		        }
+		        hash.setTextContent(sb.toString());
+				imageElement.appendChild(hash);
 	        }
             
             Element date = document.createElement("date");

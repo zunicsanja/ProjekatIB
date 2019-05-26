@@ -12,15 +12,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.imageio.ImageIO;
-import javax.swing.text.DateFormatter;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.soap.Node;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -33,13 +30,13 @@ import org.w3c.dom.Element;
 public class CreateXMLFileJava {
 	
 	
-	public static final String xmlFilePath = "C:\\ProjekatIB\\IB_Project_Desktop\\data\\xmlfile.xml";
+	public static final String xmlFilePath = "C:\\Users\\Win7\\Desktop\\slike\\xmlfile.xml";
 	public static void main(String argv[]) throws IOException, NoSuchAlgorithmException {
 		
 		ArrayList<String> fileNames = new ArrayList<>();
 		
         try {
-        	File folder = new File("C:\\Users\\Emilija\\Desktop\\slikeIB");
+        	File folder = new File("C:\\Users\\Win7\\Desktop\\slike");
     		File[] listOfFiles = folder.listFiles();
 
     		for (int i = 0; i < listOfFiles.length; i++) {

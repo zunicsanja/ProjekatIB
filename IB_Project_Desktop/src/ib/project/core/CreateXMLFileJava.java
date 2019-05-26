@@ -26,23 +26,22 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import ib.project.model.Image;
-
 public class CreateXMLFileJava {
 	
 	
-	public static final String xmlFilePath = "D:\\ProjekatIB\\IB_Project_Desktop\\data\\xmlfile.xml";
+	public static final String xmlFilePath = "C:\\ProjekatIB\\IB_Project_Desktop\\data\\xmlfile.xml";
 	public static void main(String argv[]) throws IOException {
 		
-		Image image = new Image();
+		ArrayList<String> fileNames = new ArrayList<>();
 		
         try {
-        	File folder = new File("C:\\Users\\Win7\\Desktop\\slike");
+        	File folder = new File("C:\\Users\\Emilija\\Desktop\\slikeIB");
     		File[] listOfFiles = folder.listFiles();
 
     		for (int i = 0; i < listOfFiles.length; i++) {
     		  if (listOfFiles[i].isFile()) {
     		    System.out.println("File " + listOfFiles[i].getName());
+    		    fileNames.add(listOfFiles[i].getName().toString());
     		  } else if (listOfFiles[i].isDirectory()) {
     		    System.out.println("Directory " + listOfFiles[i].getName());
     		  }
@@ -74,10 +73,9 @@ public class CreateXMLFileJava {
 	        	imageName.setTextContent(listOfFiles[i].getName());
 	        	imageElement.appendChild(imageName);
 	        	
-	        	File f = new File("C:\\Users\\Win7\\Desktop\\slike\\cat3.jpg");
 	        	
 	        	Element width = document.createElement("width");
-				BufferedImage imagee = ImageIO.read(f);
+				BufferedImage imagee = ImageIO.read(listOfFiles[i]);
 				int iwidth = imagee.getWidth();
 				width.setTextContent(Integer.toString(iwidth));
 				imageElement.appendChild(width);

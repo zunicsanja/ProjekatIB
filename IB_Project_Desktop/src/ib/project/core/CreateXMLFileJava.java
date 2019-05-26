@@ -3,6 +3,7 @@ package ib.project.core;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream.GetField;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -25,13 +26,13 @@ import ib.project.model.Image;
 public class CreateXMLFileJava {
 	
 	
-	public static final String xmlFilePath = "C:\\ProjekatIB\\IB_Project_Desktop\\data\\xmlfile.xml";
+	public static final String xmlFilePath = "D:\\ProjekatIB\\IB_Project_Desktop\\data\\xmlfile.xml";
 	public static void main(String argv[]) throws IOException {
 		
 		Image image = new Image();
 		
         try {
-        	File folder = new File("C:\\Users\\Emilija\\Desktop\\slikeIB");
+        	File folder = new File("C:\\Users\\Win7\\Desktop\\slike");
     		File[] listOfFiles = folder.listFiles();
 
     		for (int i = 0; i < listOfFiles.length; i++) {
@@ -67,12 +68,46 @@ public class CreateXMLFileJava {
 	        	Element imageName = document.createElement("name");
 	        	imageName.setTextContent(listOfFiles[i].getName());
 	        	imageElement.appendChild(imageName);
+	        	
+	        	File f = new File("C:\\Users\\Win7\\Desktop\\slike\\cat3.jpg");
+	        	
+	        	Element width = document.createElement("width");
+				BufferedImage imagee = ImageIO.read(f);
+				int iwidth = imagee.getWidth();
+				width.setTextContent(Integer.toString(iwidth));
+				imageElement.appendChild(width);
+				
+				Element height = document.createElement("height");
+				int iheight = imagee.getHeight();
+				height.setTextContent(Integer.toString(iheight));
+				imageElement.appendChild(height);
 	        }
-            
-            Element size = document.createElement("size");
-            size.appendChild(document.createTextNode("144 KB"));
-            images.appendChild(size);
-            
+	        
+	        
+			
+			
+			/*File f = new File("C:\\Users\\Win7\\Desktop\\slike");
+			for(int i = 0; i<listOfFiles.length; i++) {
+				Element imageElement = document.createElement("image");
+		        images.appendChild(imageElement);
+				Element width = document.createElement("width");
+				
+				BufferedImage imagee = ImageIO.read(f);
+				int iwidth = imagee.getWidth();
+				width.setTextContent(Integer.toString(iwidth));
+				image.appendChild(width);
+			}*/
+			
+			
+		        
+			/*Element height = document.createElement("height");
+			File ff = new File("C:\\Users\\Win7\\Desktop\\slike\\cat3.jpg");
+			for(int i = 0; i<listOfFiles.length; i++) {
+				BufferedImage imagee = ImageIO.read(ff);
+				int iheight = imagee.getHeight();
+				height.setTextContent(Integer.toString(iheight));
+				images.appendChild(height);
+			}*/
             
             Element date = document.createElement("date");
             date.appendChild(document.createTextNode("2019-05-17"));

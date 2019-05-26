@@ -4,10 +4,15 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream.GetField;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
+import javax.swing.text.DateFormatter;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -82,35 +87,11 @@ public class CreateXMLFileJava {
 				height.setTextContent(Integer.toString(iheight));
 				imageElement.appendChild(height);
 	        }
-	        
-	        
-			
-			
-			/*File f = new File("C:\\Users\\Win7\\Desktop\\slike");
-			for(int i = 0; i<listOfFiles.length; i++) {
-				Element imageElement = document.createElement("image");
-		        images.appendChild(imageElement);
-				Element width = document.createElement("width");
-				
-				BufferedImage imagee = ImageIO.read(f);
-				int iwidth = imagee.getWidth();
-				width.setTextContent(Integer.toString(iwidth));
-				image.appendChild(width);
-			}*/
-			
-			
-		        
-			/*Element height = document.createElement("height");
-			File ff = new File("C:\\Users\\Win7\\Desktop\\slike\\cat3.jpg");
-			for(int i = 0; i<listOfFiles.length; i++) {
-				BufferedImage imagee = ImageIO.read(ff);
-				int iheight = imagee.getHeight();
-				height.setTextContent(Integer.toString(iheight));
-				images.appendChild(height);
-			}*/
             
             Element date = document.createElement("date");
-            date.appendChild(document.createTextNode("2019-05-17"));
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date datee = new Date();
+            date.appendChild(document.createTextNode(dateFormat.format(datee)));
             storage.appendChild(date);
             
             TransformerFactory transformerFactory = TransformerFactory.newInstance();

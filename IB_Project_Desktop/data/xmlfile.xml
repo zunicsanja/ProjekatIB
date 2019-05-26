@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?><storage><username>John Smith</username><images><image><name>cat1.jpg</name><width>494</width><height>500</height></image><image><name>cat2.jpg</name><width>600</width><height>600</height></image><image><name>cat3.jpg</name><width>700</width><height>700</height></image></images><date>2019/05/26 13:26:32</date></storage>
+=======
+<?xml version="1.0" encoding="UTF-8"?><storage><username>John Smith</username><images><image><name>cat.jpg</name><width>494</width><height>500</height><hash>4706367242a386887dba5adaff11e382</hash></image><image><name>cat2.jpg</name><width>494</width><height>500</height><hash>4706367242a386887dba5adaff11e382</hash></image><image><name>cat3.jpg</name><width>494</width><height>500</height><hash>4706367242a386887dba5adaff11e382</hash></image></images><date>2019/05/26 13:57:45</date></storage>
+>>>>>>> 9a8577ce7601d67d34151ce27f7e681edec9a93a

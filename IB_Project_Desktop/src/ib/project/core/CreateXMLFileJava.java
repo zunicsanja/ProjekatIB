@@ -2,6 +2,7 @@ package ib.project.core;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream.GetField;
 import java.nio.charset.StandardCharsets;
@@ -32,13 +33,13 @@ import org.w3c.dom.Element;
 public class CreateXMLFileJava {
 	
 	
-	public static final String xmlFilePath = "D:\\ProjekatIB\\IB_Project_Desktop\\data\\xmlfile.xml";
+	public static final String xmlFilePath = "C:\\ProjekatIB\\IB_Project_Desktop\\data\\xmlfile.xml";
 	public static void main(String argv[]) throws IOException, NoSuchAlgorithmException {
 		
 		ArrayList<String> fileNames = new ArrayList<>();
 		
         try {
-        	File folder = new File("C:\\Users\\Win7\\Desktop\\slike");
+        	File folder = new File("C:\\Users\\Emilija\\Desktop\\slikeIB");
     		File[] listOfFiles = folder.listFiles();
 
     		for (int i = 0; i < listOfFiles.length; i++) {
@@ -89,17 +90,16 @@ public class CreateXMLFileJava {
 				imageElement.appendChild(height);
 				
 				Element hash = document.createElement("hash");
-				String path = "C:\\Users\\Win7\\Desktop\\slike";
-
-		        MessageDigest md = MessageDigest.getInstance("MD5");
-		        byte[] hashInBytes = md.digest(path.getBytes(StandardCharsets.UTF_8));
-
-		        StringBuilder sb = new StringBuilder();
-		        for (byte b : hashInBytes) {
-		            sb.append(String.format("%02x", b));
-		        }
-		        hash.setTextContent(sb.toString());
-				imageElement.appendChild(hash);
+				
+				try {
+			          MessageDigest md5Digest = MessageDigest.getInstance("MD5");
+			          String checksum = getFileChecksum(md5Digest, listOfFiles[i]);
+			          hash.setTextContent(checksum);
+			          imageElement.appendChild(hash);
+				} catch (Exception e) {
+			          System.out.println("Greska prilikom generisanja md5 hasha fajla/slike!");
+			          e.printStackTrace();
+			        }
 	        }
             
             Element date = document.createElement("date");
@@ -122,5 +122,40 @@ public class CreateXMLFileJava {
         } catch (TransformerException tfe) {
             tfe.printStackTrace();
         }
+        
+        
     }
+	
+	private static String getFileChecksum(MessageDigest digest, File file) throws IOException
+	  {
+	      //Get file input stream for reading the file content
+	      FileInputStream fis = new FileInputStream(file);
+	      
+	      //Create byte array to read data in chunks
+	      byte[] byteArray = new byte[1024];
+	      int bytesCount = 0;
+	        
+	      //Read file data and update in message digest
+	      while ((bytesCount = fis.read(byteArray)) != -1) {
+	          digest.update(byteArray, 0, bytesCount);
+	      };
+	      
+	      //close the stream; We don't need it now.
+	      fis.close();
+	      
+	      //Get the hash's bytes
+	      byte[] bytes = digest.digest();
+	      
+	      //This bytes[] has bytes in decimal format;
+	      //Convert it to hexadecimal format
+	      StringBuilder sb = new StringBuilder();
+	      for(int i=0; i< bytes.length ;i++)
+	      {
+	          sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+	      }
+	      
+	      //return complete hash
+	    return sb.toString();
+	  }
+	
 }

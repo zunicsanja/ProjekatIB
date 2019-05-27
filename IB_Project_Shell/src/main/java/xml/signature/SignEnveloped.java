@@ -46,7 +46,7 @@ public class SignEnveloped {
 
 	private static final String IN_FILE = "./data/xmlfile.xml";
 	private static final String OUT_FILE = "./data/xmlfile_signed.xml";
-	private static final String KEY_STORE_FILE = "./data/primer.jks";
+	private static final String KEY_STORE_FILE = "./data/spring.keystore";
 	
 	static {
 	  	//staticka inicijalizacija
@@ -145,10 +145,10 @@ public class SignEnveloped {
 				
 				//ucitavamo podatke
 				BufferedInputStream in = new BufferedInputStream(new FileInputStream(KEY_STORE_FILE));
-				ks.load(in, "primer".toCharArray());
+				ks.load(in, "spring".toCharArray());
 				
-				if(ks.isKeyEntry("primer")) {
-					Certificate cert = ks.getCertificate("primer");
+				if(ks.isKeyEntry("spring")) {
+					Certificate cert = ks.getCertificate("spring");
 					return cert;
 					
 				}
@@ -187,10 +187,10 @@ public class SignEnveloped {
 				
 				//ucitavamo podatke
 				BufferedInputStream in = new BufferedInputStream(new FileInputStream(KEY_STORE_FILE));
-				ks.load(in, "primer".toCharArray());
+				ks.load(in, "spring".toCharArray());
 				
-				if(ks.isKeyEntry("primer")) {
-					PrivateKey pk = (PrivateKey) ks.getKey("primer", "primer".toCharArray());
+				if(ks.isKeyEntry("spring")) {
+					PrivateKey pk = (PrivateKey) ks.getKey("spring", "spring".toCharArray());
 					return pk;
 				}
 				else

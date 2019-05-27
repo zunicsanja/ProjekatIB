@@ -30,13 +30,13 @@ import org.w3c.dom.Element;
 public class CreateXMLFileJava {
 	
 	
-	public static final String xmlFilePath = "C:\\Users\\Win7\\Desktop\\slike\\xmlfile.xml";
+	public static final String xmlFilePath = "C:\\ProjekatIB\\IB_Project_Shell\\data\\xmlfile.xml";
 	public static void main(String argv[]) throws IOException, NoSuchAlgorithmException {
 		
 		ArrayList<String> fileNames = new ArrayList<>();
 		
         try {
-        	File folder = new File("C:\\Users\\Win7\\Desktop\\slike");
+        	File folder = new File("C:\\Users\\Emilija\\Desktop\\slikeIB");
     		File[] listOfFiles = folder.listFiles();
 
     		for (int i = 0; i < listOfFiles.length; i++) {

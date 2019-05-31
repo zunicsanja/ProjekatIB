@@ -9,7 +9,7 @@ import java.util.zip.ZipOutputStream;
 
 public class ZipFile {
 	public static void main(String[] args) throws IOException {
-        String sourceFile = "C:\\Users\\Win7\\Desktop\\slike";
+        String sourceFile = "D:\\ProjekatIB\\IB_Project_Shell\\src\\main\\resources\\static\\user_content";
         FileOutputStream fos = new FileOutputStream("dirCompressed.zip");
         ZipOutputStream zipOut = new ZipOutputStream(fos);
         File fileToZip = new File(sourceFile);

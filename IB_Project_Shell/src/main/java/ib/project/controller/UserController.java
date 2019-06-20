@@ -1,62 +1,50 @@
 package ib.project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import ib.project.model.User;
-import ib.project.service.SecurityService;
 import ib.project.service.UserService;
-import ib.project.validator.UserValidator;
 
+import java.security.Principal;
+import java.util.List;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+
+
+//Celom kontroleru mogu pristupiti samo autentifikovani korisnici
+@RestController
+@RequestMapping( value = "/api", produces = MediaType.APPLICATION_JSON_VALUE )
 public class UserController {
 	@Autowired
     private UserService userService;
 
-    @Autowired
-    private SecurityService securityService;
-
-    @Autowired
-    private UserValidator userValidator;
-
-    @GetMapping("/registration")
-    public String registration(Model model) {
-        model.addAttribute("userForm", new User());
-
-        return "registration";
-    }
+    //Putanja => localhost:8080/api/user/1
     
-    @PostMapping("/registration")
-    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
-        userValidator.validate(userForm, bindingResult);
-
-        if (bindingResult.hasErrors()) {
-            return "registration";
-        }
-
-        userService.save(userForm);
-
-        securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
-
-        return "redirect:/welcome";
-    }
-    
-    @GetMapping("/login")
-    public String login(Model model, String error, String logout) {
-        if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
-
-        if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
-
-        return "login";
+    //Za pristup ovoj metodi neophodno je da ulogovani korisnik ima ADMIN ulogu
+    //Ukoliko nema, server ce vratiti gresku 403 Forbidden
+    //Korisnik jeste autentifikovan, ali nije autorizovan da pristupi resursu
+    @RequestMapping( method = GET, value = "/user/{userId}" )
+    @PreAuthorize("hasRole('ADMIN')")
+    public User loadById( @PathVariable Long userId ) {
+        return this.userService.findById( userId );
     }
 
-    @GetMapping({"/", "/welcome"})
-    public String welcome(Model model) {
-        return "welcome";
+    @RequestMapping( method = GET, value= "/user/all")
+    @PreAuthorize("hasRole('ADMIN')")
+    public List<User> loadAll() {
+        return this.userService.findAll();
+    }
+
+
+    @RequestMapping("/whoami")
+    @PreAuthorize("hasRole('USER')")
+    public User user(Principal user) {
+        return this.userService.findByUsername(user.getName());
     }
 }
+

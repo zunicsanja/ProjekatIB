@@ -3,6 +3,7 @@ package ib.project.model;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -53,7 +54,7 @@ public class User implements UserDetails{
     @JoinTable(name = "user_authority",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
-    private List<Authority> authorities;
+    private Set<Authority> authorities;
 	
 	
 	public Long getId() {
@@ -84,11 +85,11 @@ public class User implements UserDetails{
     
    
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.authorities;
+    public Set<Authority> getAuthorities() {
+        return authorities;
     }
     
-    public void setAuthorities(List<Authority> authorities) {
+    public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
     }
     

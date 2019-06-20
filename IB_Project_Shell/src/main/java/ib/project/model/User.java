@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 
 import org.joda.time.DateTime;
+import org.springframework.data.annotation.Transient;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -43,6 +44,9 @@ public class User implements UserDetails{
 	
 	@Column(name = "last_password_reset_date")
     private Timestamp lastPasswordResetDate;
+	
+	@Transient
+    private String passwordConfirm;
 	
 	@Column(name = "certificate")
     private String certificate;
@@ -107,6 +111,14 @@ public class User implements UserDetails{
 
     public void setCertificate(String certificate) {
         this.certificate = certificate;
+    }
+    
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
     }
 
     @Override

@@ -45,9 +45,6 @@ public class User implements UserDetails{
 	@Column(name = "last_password_reset_date")
     private Timestamp lastPasswordResetDate;
 	
-	@Transient
-    private String passwordConfirm;
-	
 	@Column(name = "certificate")
     private String certificate;
 	
@@ -113,14 +110,6 @@ public class User implements UserDetails{
         this.certificate = certificate;
     }
     
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
-
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
-    }
-
     @Override
     public boolean isEnabled() {
         return enabled;

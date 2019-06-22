@@ -20,9 +20,16 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import ib.project.security.TokenHelper;
 import ib.project.security.auth.RestAuthenticationEntryPoint;
-//import ib.project.security.auth.TokenAuthenticationFilter;
+import ib.project.security.auth.TokenAuthenticationFilter;
 import ib.project.service.impl.CustomUserDetailsService;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * Created by fan.jin on 2016-10-19.
+ */
 
 @Configuration
 @EnableWebSecurity
@@ -74,9 +81,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //svim korisnicima dopusti da pristupe putanjama /auth/**
                 .antMatchers("/auth/**").permitAll()
                 //svaki zahtev mora biti autorizovan
-                .anyRequest().authenticated();
+                .anyRequest().authenticated().and()
                 //presretni svaki zahtev filterom
-                //.addFilterBefore(new TokenAuthenticationFilter(tokenHelper, jwtUserDetailsService), BasicAuthenticationFilter.class);
+                .addFilterBefore(new TokenAuthenticationFilter(tokenHelper, jwtUserDetailsService), BasicAuthenticationFilter.class);
 
         http.csrf().disable();
     }

@@ -72,20 +72,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     //Definisemo prava pristupa odredjenim URL-ovima
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-        		//komunikacija izmedju klijenta i servera je stateless
-                .sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS ).and()
-                //za neautorizovane zahteve posalji 401 gresku
-                .exceptionHandling().authenticationEntryPoint( restAuthenticationEntryPoint ).and()
-                .authorizeRequests()
-                //svim korisnicima dopusti da pristupe putanjama /auth/**
-                .antMatchers("/auth/**").permitAll()
-                //svaki zahtev mora biti autorizovan
-                .anyRequest().authenticated().and()
-                //presretni svaki zahtev filterom
-                .addFilterBefore(new TokenAuthenticationFilter(tokenHelper, jwtUserDetailsService), BasicAuthenticationFilter.class);
+    	 http
+ 		//komunikacija izmedju klijenta i servera je stateless
+         .sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS ).and()
+         //za neautorizovane zahteve posalji 401 gresku
+         .exceptionHandling().authenticationEntryPoint( restAuthenticationEntryPoint ).and()
+         .authorizeRequests()
+         //svim korisnicima dopusti da pristupe putanjama /auth/**
+         .antMatchers("/auth/**").permitAll()
+         //svaki zahtev mora biti autorizovan
+         .anyRequest().authenticated().and()
+         //presretni svaki zahtev filterom
+         .addFilterBefore(new TokenAuthenticationFilter(tokenHelper, jwtUserDetailsService), BasicAuthenticationFilter.class);
 
-        http.csrf().disable();
+    	 http.csrf().disable();
     }
 
 

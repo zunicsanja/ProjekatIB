@@ -17,7 +17,7 @@ import java.util.Date;
 
 @Component
 public class TokenHelper {
-	@Value("spring-security-demo")
+	@Value("IB_Project_Shell")
 	private String APP_NAME;
 
 	@Value("somesecret")

@@ -61,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     //Svaki 
     @Autowired
     public void configureGlobal( AuthenticationManagerBuilder auth ) throws Exception {
-        auth.userDetailsService( jwtUserDetailsService )
+        auth .userDetailsService( jwtUserDetailsService )
             .passwordEncoder( passwordEncoder() );
     }
 

@@ -4,12 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import ib.project.model.Authority;
 import ib.project.model.User;
+import ib.project.repository.AuthorityRepository;
 import ib.project.repository.UserRepository;
 import ib.project.service.UserService;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 

@@ -110,5 +110,7 @@ public class AuthenticationController {
         public String oldPassword;
         public String newPassword;
     }
+    
+    
 }
 

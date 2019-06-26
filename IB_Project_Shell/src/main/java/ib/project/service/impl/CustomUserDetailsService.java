@@ -1,5 +1,6 @@
 package ib.project.service.impl;
 
+import java.nio.file.AccessDeniedException;
 import java.util.HashSet;
 import java.util.List;
 
@@ -79,8 +80,16 @@ public class CustomUserDetailsService implements UserDetailsService{
     }
     
     public void saveUser(User user) {
-    	user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setAuthorities(new HashSet<>(authorityRepository.findAll()));
         userRepository.save(user);
+    }
+    
+    public List<User> findAll() throws AccessDeniedException {
+    	List<User> result = userRepository.findAll();
+    	return result;
+    }
+    
+    public User findById(Long id) throws AccessDeniedException {
+    	User u = userRepository.findOne(id);
+    	return u;
     }
 }

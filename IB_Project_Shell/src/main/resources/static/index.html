@@ -16,7 +16,7 @@
     <ul style="margin-bottom: 20px;" class="nav nav-pills" role="tablist">
         <li ng-class="tabClass('/')"><a href="#/" ng-click="setSelectedTab('/')">Home</a></li>
         <li ng-class="tabClass('/login')" ng-hide="authenticated"><a href="#/login" ng-click="setSelectedTab('/login')">Login</a></li>
-        <li ng-class="tabClass('/registration')" ng-hide="authenticated"><a href="#/registration" ng-click="setSelectedTab('/registration')">Create account</a></li>
+        <li ng-class="tabClass('/registration')" ng-hide="authenticated"><a href="/registration/registration.html" ng-click="setSelectedTab('/registration')">Create account</a></li>
         <li ng-show="authenticated"><a href="" ng-click="logout()">logout</a></li>
     </ul>
     <div ng-view ></div>

@@ -1,15 +1,11 @@
 $("#register").click(function(event) {
 	
-	var user = $("#reg_username").val();
-	var pass = $("#reg_password").val();
-	var last = $("#reg_lastfullname").val();
-	var name = $("#reg_fullname").val();
-	var email = $("#reg_email").val();
+	var user = $("#username").val();
+	var pass = $("#password").val();
+	var email = $("#email").val();
 	
 	
 	var registerForm = {
-			'firstname':name,
-			'lastname':last,
 			'username':user,
 			'password':password,
 			'email':email

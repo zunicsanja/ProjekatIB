@@ -3,9 +3,7 @@
 angular.module('myApp', [
   'ngRoute',
   'myApp.dashboard',
-  'myApp.dashboardR',
   'myApp.login',
-  'myApp.registration',
   'myApp.services'
 ]).
 config(['$locationProvider', '$routeProvider', "$httpProvider", function($locationProvider, $routeProvider, $httpProvider) {

@@ -24,6 +24,7 @@ import ib.project.keystore.IssuerData;
 import ib.project.keystore.KeyStoreWriter;
 import ib.project.keystore.SubjectData;
 import ib.project.model.User;
+import ib.project.model.UserDTO;
 import ib.project.model.UserTokenState;
 import ib.project.security.TokenHelper;
 import ib.project.security.auth.JwtAuthenticationRequest;
@@ -127,7 +128,7 @@ public class AuthenticationController {
     }
     
     @RequestMapping(value="/register", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> register(@RequestBody User userDTO) throws ParseException{
+    public ResponseEntity<?> register(@RequestBody UserDTO userDTO) throws ParseException{
     	User user = new User();
     	
     	CertificateGenerator gen = new CertificateGenerator();

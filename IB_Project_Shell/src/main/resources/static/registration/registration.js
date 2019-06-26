@@ -24,6 +24,6 @@ $("#register").click(function(event) {
 	xhr.responseType = 'json';
 	
 	xhr.send(JSON.stringify(registerFrom));
-	window.location = 'login.html';
+	window.location = 'registration/registration.html';
 	
 }

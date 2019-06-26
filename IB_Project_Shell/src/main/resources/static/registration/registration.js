@@ -15,11 +15,11 @@ $("#register").click(function(event) {
 	console.log(registerForm);
 	
 	var xhr = new XMLHttpRequest();	
-	xhr.open("POST", "http://localhost:8443/auth/register", true);
+	xhr.open("POST", "http://localhost:8083/auth/register", true);
 	xhr.setRequestHeader("Content-Type", "application/json;charsfet=utf-8")
 	xhr.responseType = 'json';
 	
 	xhr.send(JSON.stringify(registerFrom));
-	window.location = 'registration/registration.html';
+	window.location = 'login/login.html';
 	
 }

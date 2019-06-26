@@ -140,8 +140,8 @@ public class AuthenticationController {
     	
     	X500NameBuilder builder = new X500NameBuilder(BCStyle.INSTANCE);
     	builder.addRDN(BCStyle.CN, userDTO.getFirstname()+" "+userDTO.getLastname());
-    	builder.addRDN(BCStyle.SURNAME, userDTO.getLastname());
-    	builder.addRDN(BCStyle.GIVENNAME, userDTO.getFirstname());
+    	builder.addRDN(BCStyle.SURNAME, userDTO.getFirstname());
+    	builder.addRDN(BCStyle.GIVENNAME, userDTO.getLastname());
     	builder.addRDN(BCStyle.O, "UNS-FTN");
     	builder.addRDN(BCStyle.OU, "Katedra za informatiku");
     	builder.addRDN(BCStyle.C, "RS");
@@ -158,7 +158,7 @@ public class AuthenticationController {
     	KeyStoreWriter keyStoreWriter = new KeyStoreWriter();
     	keyStoreWriter.loadKeyStore(null, userDTO.getUsername().toCharArray());
     	keyStoreWriter.write(userDTO.getUsername(), keyPair.getPrivate(), "test10".toCharArray(), cert);
-    	keyStoreWriter.saveKeyStore("D:\\IBPROJEKAT\\ProjekatIB\\IB_Project_Shel\\data\\" + userDTO.getUsername()+".jks", "test10".toCharArray());
+    	keyStoreWriter.saveKeyStore("D:\\ProjekatIBNovi\\ProjekatIB\\IB_Project_Shell\\data" + userDTO.getUsername()+".jks", "test10".toCharArray());
     	
     	
     	String username = userDTO.getUsername();
@@ -167,7 +167,9 @@ public class AuthenticationController {
     	user.setPassword(passwordEncoder.encode(password));
     	user.setEnabled(false);
     	user.setEmail(userDTO.getEmail());
-    	user.setCertificate("D:\\IBPROJEKAT\\ProjekatIB\\IB_Project_Shel\\data\\"+ userDTO.getUsername()+".jks");
+    	user.setFirstname(userDTO.getFirstname());
+    	user.setLastname(userDTO.getLastname());
+    	user.setCertificate("D:\\ProjekatIBNovi\\ProjekatIB\\IB_Project_Shell"+ userDTO.getUsername()+".jks");
     	userDetailsService.saveUser(user);
     	
     	Map<String, String> result = new HashMap<>();

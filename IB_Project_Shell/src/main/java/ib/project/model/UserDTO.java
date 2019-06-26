@@ -1,5 +1,7 @@
 package ib.project.model;
 
+import javax.persistence.Entity;
+
 public class UserDTO {
 	private String firstname;
 	private String lastname;
@@ -45,6 +47,10 @@ public class UserDTO {
 		this.username = username;
 		this.password = password;
 		this.email = email;
+	}
+	
+	public UserDTO() {
+		
 	}
 	
 	

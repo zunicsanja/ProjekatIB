@@ -32,6 +32,12 @@ public class User implements UserDetails{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
+	@Column(name = "firstname")
+    private String firstname;
+	
+	@Column(name = "lastname")
+    private String lastname;
+	
 	@Column(name = "username")
     private String username;
 	
@@ -55,7 +61,7 @@ public class User implements UserDetails{
     @JoinTable(name = "user_authority",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
-    private List<Authority> authorities;
+    private Set<Authority> authorities;
 	
 	
 	public Long getId() {
@@ -66,7 +72,24 @@ public class User implements UserDetails{
         this.id = id;
     }
     
-    public String getUsername() {
+    
+    public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getUsername() {
         return username;
     }
 
@@ -86,11 +109,11 @@ public class User implements UserDetails{
     
    
     @Override
-    public List<Authority> getAuthorities() {
+    public Set<Authority> getAuthorities() {
         return authorities;
     }
     
-    public void setAuthorities(List<Authority> authorities) {
+    public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
     }
     

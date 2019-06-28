@@ -4,6 +4,9 @@
 	<p>Your authority(s)
 		<code ng-repeat="authority in user.authorities">{{authority.authority | limitTo:999:5}}</code>
 	</p>
+	<form method="get" action="/upload.html">
+    <button type="submit">File Upload/Download</button>
+</form>
 </div>
 <div  ng-show="!authenticated">	
 </div>

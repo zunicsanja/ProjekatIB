@@ -158,7 +158,7 @@ public class AuthenticationController {
     	KeyStoreWriter keyStoreWriter = new KeyStoreWriter();
     	keyStoreWriter.loadKeyStore(null, userDTO.getUsername().toCharArray());
     	keyStoreWriter.write(userDTO.getUsername(), keyPair.getPrivate(), "test10".toCharArray(), cert);
-    	keyStoreWriter.saveKeyStore("D:\\ProjekatIBNovi\\ProjekatIB\\IB_Project_Shell\\data" + userDTO.getUsername()+".jks", "test10".toCharArray());
+    	keyStoreWriter.saveKeyStore("C:\\ProjekatIB\\IB_Project_Shell\\data" + userDTO.getUsername()+".jks", "test10".toCharArray());
     	
     	
     	String username = userDTO.getUsername();
@@ -169,7 +169,7 @@ public class AuthenticationController {
     	user.setEmail(userDTO.getEmail());
     	user.setFirstname(userDTO.getFirstname());
     	user.setLastname(userDTO.getLastname());
-    	user.setCertificate("D:\\ProjekatIBNovi\\ProjekatIB\\IB_Project_Shell"+ userDTO.getUsername()+".jks");
+    	user.setCertificate("C:\\ProjekatIB\\IB_Project_Shell"+ userDTO.getUsername()+".jks");
     	userDetailsService.saveUser(user);
     	
     	Map<String, String> result = new HashMap<>();
